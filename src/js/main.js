@@ -18,6 +18,38 @@
     //   };
     // }
 
+    $(".text-spoiler__close-btn").on("click", function (e) {
+      e.preventDefault();
+      const $parent = $(this).closest(".text-spoiler");
+      const $content = $parent.find(".text-spoiler__content");
+
+      $content.css("max-height", "");
+      setTimeout(() => {
+        $parent.removeClass("active");
+      }, 300);
+    });
+
+    // Simple phone input mask
+    $(".phone-input-mask").on("keypress paste", function (evt) {
+      // ^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$
+      var theEvent = evt || window.event;
+
+      var key = null;
+      // Handle paste
+      if (theEvent.type === "paste") {
+        key = event.clipboardData.getData("text/plain");
+      } else {
+        // Handle key press
+        key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+      }
+      var regex = /([0-9() +-])/;
+      if (!regex.test(key)) {
+        theEvent.returnValue = false;
+        if (theEvent.preventDefault) theEvent.preventDefault();
+      }
+    });
+
     // Init aos
     if (typeof AOS !== "undefined") {
       AOS.init({
@@ -90,14 +122,16 @@
           if (data !== "Email sent") {
             alert("Ошибка, повторите позднее");
             console.error(data);
+            return;
           }
 
           // Success message
-          $(".form-success-message").removeClass("d-none");
-
-          // Open thanks popup
-          // closePopup();
-          // openSuccessPopup();
+          if (self.hasClass("ajax-contact-form--modal")) {
+            closePopup();
+            openSuccessPopup();
+          } else {
+            self.find(".form-success-message").removeClass("d-none");
+          }
         },
         error: function (data) {
           // Basic error handling
@@ -161,14 +195,16 @@
           if (data !== "Email sent") {
             alert("Ошибка, повторите позднее");
             console.error(data);
+            return;
           }
 
           // Success message
-          $(".form-success-message").removeClass("d-none");
-
-          // Open thanks popup
-          // closePopup();
-          // openSuccessPopup();
+          if (self.hasClass("ajax-contact-form--modal")) {
+            closePopup();
+            openSuccessPopup();
+          } else {
+            self.find(".form-success-message").removeClass("d-none");
+          }
         },
         error: function (data) {
           // Basic error handling
@@ -177,21 +213,6 @@
         },
       });
     });
-
-    // File input change handler / File input name
-    $("#presentationSectionFormFileInput, #vacancySectionFormFileInput").on(
-      "change",
-      function (e) {
-        $(".contact-form__file-name").html("").addClass("d-none");
-
-        let name = $(this)[0].files[0].name;
-        if (name) {
-          $(".contact-form__file-name")
-            .html(`<small>${name}</small>`)
-            .removeClass("d-none");
-        }
-      },
-    );
 
     // Service filter
     $(".tag-menu__item-link").on("click", function () {
@@ -249,6 +270,48 @@
           '" ></iframe>',
       );
     });
+    // Contact form popup
+    $(".open-contact-popup").on("click", function (e) {
+      e.preventDefault();
+      closePopup();
+
+      $("body").addClass("overflow-hidden");
+      $("#contactPopup").fadeIn(300);
+    });
+    // Vacancy form popup
+    $(".vacancy-card__cv-btn").on("click", function (e) {
+      e.preventDefault();
+      closePopup();
+      $(".overlay-cdk__vacancy-position").find(".vac-pos").html("N/A");
+      $(".overlay-cdk__vacancy-details").html("N/A");
+      $("#vacancyPopupFormVacancyInput").val("");
+      $("#vacancyPopupFormCompanyInput").val("");
+
+      let $content = $(this).closest(".vacancy-card__content");
+      let title = $content.find(".vacancy-card__content-title").text().trim();
+      let $info = $content.find(".vacancy-card__info").clone();
+
+      if (title) {
+        $(".overlay-cdk__vacancy-position").find(".vac-pos").html(title);
+        $("#vacancyPopupFormVacancyInput").val(title);
+      }
+      if ($info) {
+        let company = $info.find(".vacancy-card__info-company").text().trim();
+        $(".overlay-cdk__vacancy-details").html($info);
+        if (company) {
+          $("#vacancyPopupFormCompanyInput").val(company);
+        }
+      }
+
+      $("body").addClass("overflow-hidden");
+      $("#vacancyPopup").fadeIn(300);
+    });
+
+    function openSuccessPopup() {
+      $("body").addClass("overflow-hidden");
+      $("#thanksPopup").fadeIn(300);
+    }
+
     $(".overlay-cdk, .overlay-cdk__inner").on("click", function (e) {
       if (e.target !== e.currentTarget) return;
 
@@ -257,7 +320,6 @@
     $(".overlay-cdk__close-btn").on("click", function () {
       closePopup();
     });
-
     function closePopup() {
       $("body").removeClass("overflow-hidden");
       $(".overlay-cdk").fadeOut(300);
@@ -300,6 +362,7 @@
         });
       }
     }
+
     $(document).on("scroll", function () {
       // if ($(".main-header").length) {
       //   floatingHeaderUpdate();
@@ -455,6 +518,20 @@
       menuItem.find(".contact-map-menu__item-btn").trigger("click");
     });
 
+    // File input change handler / File input name
+    $(
+      "#presentationSectionFormFileInput, #vacancySectionFormFileInput, #vacancyPopupFormFileInput",
+    ).on("change", function (e) {
+      $(".contact-form__file-name").html("").addClass("d-none");
+
+      let name = $(this)[0].files[0].name;
+      if (name) {
+        $(".contact-form__file-name")
+          .html(`<small>${name}</small>`)
+          .removeClass("d-none");
+      }
+    });
+
     // Vacancy section form
     $(".open-vacancy-section-form-file-input").on("click", function (e) {
       e.preventDefault();
@@ -468,16 +545,29 @@
         if (this.files[0].size > 10485760) {
           alert("Максимальный размер файла: 10 МБ");
           $(this).val("");
-          // $("#vacancySectionFormFileInputName").html("");
         }
 
         name = this.files[0].name;
       }
-      // if (name) {
-      //   $("#vacancySectionFormFileInputName").html("Файл: " + name);
-      // } else {
-      //   $("#vacancySectionFormFileInputName").html("");
-      // }
+    });
+
+    // Vacancy popup form
+    $(".open-vacancy-popup-form-file-input").on("click", function (e) {
+      e.preventDefault();
+
+      $("#vacancyPopupFormFileInput").trigger("click");
+    });
+
+    $("#vacancyPopupFormFileInput").on("change", function (e) {
+      let name = null;
+      if (this.files.length) {
+        if (this.files[0].size > 10485760) {
+          alert("Максимальный размер файла: 10 МБ");
+          $(this).val("");
+        }
+
+        name = this.files[0].name;
+      }
     });
 
     // Presentation section form
@@ -498,11 +588,6 @@
 
         name = this.files[0].name;
       }
-      // if (name) {
-      //   $("#vacancySectionFormFileInputName").html("Файл: " + name);
-      // } else {
-      //   $("#vacancySectionFormFileInputName").html("");
-      // }
     });
 
     // Out of bound swiper containers
@@ -517,6 +602,17 @@
     );
     $(".out-of-bound-sw .swiper-container").css("padding-right", `50px`);
 
+    // Text spoiler
+    $(".text-spoiler__btn").on("click", function (e) {
+      e.preventDefault();
+
+      const $parent = $(this).closest(".text-spoiler");
+      const $content = $parent.find(".text-spoiler__content");
+
+      $parent.addClass("active");
+      $content.css("max-height", $content[0].scrollHeight);
+    });
+
     $(window).on("resize", function () {
       containerToRight =
         $(window).outerWidth(true) -
@@ -529,6 +625,18 @@
         `${containerToRight}px`,
       );
       $(".out-of-bound-sw .swiper-container").css("padding-right", `50px`);
+
+      // Text spoiler
+      if ($(".text-spoiler").length) {
+        $(".text-spoiler").each(function () {
+          if ($(this).hasClass("active")) {
+            const $parent = $(this).closest(".text-spoiler");
+            const $content = $parent.find(".text-spoiler__content");
+
+            $content.css("max-height", $content[0].scrollHeight);
+          }
+        });
+      }
     });
 
     if ($(".service-swiper").length) {
@@ -601,6 +709,37 @@
 
         const arrowNext = $(this)
           .closest(".contact-swiper-wrap")
+          .find(".swiper-button-next")[0];
+
+        new Swiper($(this)[0], {
+          // navigation: {
+          //   nextEl: arrowNext,
+          //   prevEl: arrowPrev,
+          // },
+          slidesPerView: "auto",
+          spaceBetween: 20,
+          freeMode: true,
+          updateOnWindowResize: true,
+          // breakpoints: {
+          //   768: {
+          //     slidesPerView: 3,
+          //   },
+          //   992: {
+          //     slidesPerView: 4,
+          //   },
+          // },
+        });
+      });
+    }
+
+    if ($(".news-swiper").length) {
+      $(".news-swiper").each(function () {
+        const arrowPrev = $(this)
+          .closest(".news-swiper-wrap")
+          .find(".swiper-button-prev")[0];
+
+        const arrowNext = $(this)
+          .closest(".news-swiper-wrap")
           .find(".swiper-button-next")[0];
 
         new Swiper($(this)[0], {

@@ -100,6 +100,176 @@
   </div>
 </footer>
 <noindex>
+  <div id="contactPopup" class="overlay-cdk">
+    <button class="overlay-cdk__close-btn">✖</button>
+    <div class="overlay-cdk__inner">
+      <div class="overlay-cdk__form-content">
+        <div class="overlay-cdk__title mbp-40 mbp-md-20">
+          Возьмите свой бизнес под контроль
+        </div>
+        <div class="overlay-cdk__text mbp-20 d-none d-md-block">
+          Оставьте свои контакты и наши менеджеры бесплатно проконсультируют вас
+          и подскажут, как именно мы сможем вам помочь
+        </div>
+        <form
+          class="ajax-contact-form ajax-contact-form--modal"
+          action="/"
+          method="POST"
+        >
+          <div class="dd-input-wrap mbp-20">
+            <input
+              class="dd-input w-100"
+              type="text"
+              name="name"
+              placeholder="Как вас зовут?"
+              autocomplete="name"
+              required
+            />
+          </div>
+          <div class="dd-input-wrap mbp-20">
+            <input
+              class="dd-input w-100"
+              type="tel"
+              name="phone"
+              placeholder="Ваш номер телефона"
+              autocomplete="tel"
+              required
+            />
+          </div>
+          <div class="dd-input-wrap mbp-20">
+            <input
+              class="dd-input w-100"
+              type="text"
+              name="company"
+              placeholder="Вашa компания"
+              autocomplete="work"
+              required
+            />
+          </div>
+          <div class="dd-button-wrap mbp-20">
+            <button class="dd-button w-100" type="submit">
+              Заказать консультацию
+            </button>
+          </div>
+          <div class="form-checkbox-wrap">
+            <input
+              type="checkbox"
+              id="overlay_checkbox_1"
+              name="terms_agreed"
+              class="custom-control-input"
+              value="type_pickup"
+              checked
+              required
+            />
+            <label class="custom-control-label" for="overlay_checkbox_1">
+              <span>
+                Я согласен на сбор и обработку моих персональных данных
+              </span>
+            </label>
+          </div>
+          <div class="form-success-message text-success mt-3 mb-3 d-none">
+            Сообщение успешно отправлено, мы свяжемся с вами в ближайшее время.
+          </div>
+
+          <input type="hidden" name="action" value="contactForm" />
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="vacancyPopup" class="overlay-cdk">
+    <button class="overlay-cdk__close-btn">✖</button>
+    <div class="overlay-cdk__inner">
+      <div class="overlay-cdk__form-content">
+        <div class="overlay-cdk__vacancy-position mbp-20">
+          <b>Должность: </b><span class="vac-pos">N/A</span>
+        </div>
+        <div class="overlay-cdk__vacancy-details mbp-30">
+          N/A
+        </div>
+        <form class="ajax-file-form ajax-contact-form--modal" action="/" method="POST">
+          <div class="dd-input-wrap mbp-20">
+            <input
+              class="dd-input w-100"
+              type="text"
+              name="name"
+              placeholder="Как вас зовут?"
+              autocomplete="name"
+              required
+            />
+          </div>
+          <div class="dd-input-wrap mbp-20">
+            <input
+              class="dd-input w-100"
+              type="tel"
+              name="phone"
+              placeholder="Ваш номер телефона"
+              autocomplete="tel"
+              required
+            />
+          </div>
+          <div class="dd-input-wrap mbp-20">
+            <div class="contact-form__file-btn-wrap">
+              <a class="contact-form__file-btn open-vacancy-popup-form-file-input" href="#"></i> Прикрепить резюме <i class="icon-clip"></i></a>
+            </div>
+          </div>
+          <div class="contact-form__file-name text-muted mb-4 d-none">
+            N/A
+          </div>
+          <div class="dd-button-wrap mbp-20">
+            <button class="dd-button w-100" type="submit">
+              Отправить свое резюме
+            </button>
+          </div>
+          <div class="form-checkbox-wrap">
+            <input
+              type="checkbox"
+              id="overlay_checkbox_1"
+              name="terms_agreed"
+              class="custom-control-input"
+              value="type_pickup"
+              checked
+              required
+            />
+            <label class="custom-control-label" for="overlay_checkbox_1">
+              <span>
+                Я согласен на сбор и обработку моих персональных данных
+              </span>
+            </label>
+          </div>
+          <div>
+            <input
+              id="vacancyPopupFormVacancyInput"
+              type="hidden"
+              name="vacancy"
+              value="Новая вакансия"
+            />
+            <input
+              id="vacancyPopupFormCompanyInput"
+              type="hidden"
+              name="company"
+            />
+            <input
+              id="vacancyPopupFormFileInput"
+              type="file"
+              name="attachment"
+              style="display: none"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="thanksPopup" class="overlay-cdk">
+    <button class="overlay-cdk__close-btn">✖</button>
+    <div class="overlay-cdk__inner">
+      <div class="overlay-cdk__form-content">
+        <div class="overlay-cdk__title mbp-20">Спасибо</div>
+        <div class="overlay-cdk__text">
+          Сообщение успешно отправлено, мы свяжемся с вами в ближайшее время.
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="videoPopup" class="overlay-cdk">
     <button class="overlay-cdk__close-btn">✖</button>
     <div class="overlay-cdk__inner">
