@@ -18,6 +18,40 @@
     //   };
     // }
 
+    // Add smooth scrolling to all links with the class scroll
+    $("a").on("click", function (event) {
+      // Make sure this.hash has a value before overriding default behavior
+      if (this.hash !== "" && $(window).width() <= 992) {
+        // Prevent default anchor click behavior
+        event.preventDefault();
+
+        // Store hash
+        var hash = this.hash;
+
+        // Using jQuery's animate() method to add smooth page scroll
+        // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+        $("html, body").animate(
+          {
+            scrollTop: $(hash).offset().top - 80, // -80 - scroll-padding (header height)
+          },
+          400,
+          function () {
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+          },
+        );
+      } // End if
+    });
+
+    // Toggle navbar icon
+    $(".navbar-toggler").on("click", function () {
+      $(this)
+        .find("i")
+        .toggleClass("icon-burger")
+        .toggleClass("custom-icon-close");
+    });
+
+    // Text spoiler
     $(".text-spoiler__close-btn").on("click", function (e) {
       e.preventDefault();
       const $parent = $(this).closest(".text-spoiler");

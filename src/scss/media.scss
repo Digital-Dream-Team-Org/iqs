@@ -155,7 +155,7 @@
 
   .main-footer {
     padding: 60px 0;
-    padding-bottom: 30px;
+    padding-bottom: 100px;
     &__menu-wrap {
       margin-bottom: 0;
     }
@@ -584,6 +584,7 @@
     &__details {
       width: 100%;
       min-height: 0;
+      height: auto;
 
       &-header {
         height: 125px;
@@ -675,6 +676,7 @@
 
   .sticky-heading {
     position: static;
+    margin-bottom: 20px;
   }
 
   .text-spoiler {
@@ -707,8 +709,14 @@
   }
 
   .overlay-cdk {
+    &__close-btn {
+      top: 5px;
+      right: 5px;
+    }
+
     &__inner {
       padding: 20px;
+      padding-top: 40px;
     }
     &__form-content {
       padding: 30px 20px;
@@ -727,6 +735,13 @@
   }
 }
 @media (max-width: 768px) {
+  .news-swiper {
+    .swiper-slide {
+      .news-card-wrap {
+        width: 400px;
+      }
+    }
+  }
 }
 @media (max-width: 576px) {
   .section-header {
@@ -758,6 +773,25 @@
       font-size: 12px;
 
       margin-bottom: 18px;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .news-swiper {
+    .swiper-slide {
+      .news-card-wrap {
+        width: 340px;
+      }
+    }
+  }
+}
+@media (max-width: 380px) {
+  .news-swiper {
+    .swiper-slide {
+      .news-card-wrap {
+        width: 280px;
+      }
     }
   }
 }
