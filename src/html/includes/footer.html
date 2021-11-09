@@ -186,7 +186,7 @@
         <div class="overlay-cdk__vacancy-details mbp-30">
           N/A
         </div>
-        <form class="ajax-file-form ajax-contact-form--modal" action="/" method="POST">
+        <form class="ajax-file-form ajax-contact-form--modal" data-file-required="true" action="/" method="POST">
           <div class="dd-input-wrap mbp-20">
             <input
               class="dd-input w-100"
@@ -214,6 +214,13 @@
           </div>
           <div class="contact-form__file-name text-muted mb-4 d-none">
             N/A
+          </div>
+          <div class="form-error-message__file text-danger mt-3 mb-3 d-none">
+            Пожалуйста, прикрепите свое резюме
+          </div>
+          <div class="form-success-message text-success mt-3 mb-3 d-none">
+            Сообщение успешно отправлено, мы свяжемся с вами в ближайшее
+            время.
           </div>
           <div class="dd-button-wrap mbp-20">
             <button class="dd-button w-100" type="submit">

@@ -298,7 +298,7 @@
                   <div class="contact-form-widget__title">
                     Закажите бесплатную консультацию
                   </div>
-                  <form class="contact-form-widget" action="/">
+                  <form class="contact-form-widget ajax-file-form" data-file-required="true" action="http://iq.local/wp-admin/admin-ajax.php" method="POST">
                     <div class="dd-input-wrap">
                       <input
                         class="dd-input w-100"
@@ -341,6 +341,13 @@
                     </div>
                     <div class="contact-form__file-name text-muted mb-4 d-none">
                       N/A
+                    </div>
+                    <div class="form-error-message__file text-danger mt-3 mb-3 d-none">
+                      Пожалуйста, прикрепите свое резюме
+                    </div>
+                    <div class="form-success-message text-success mt-3 mb-3 d-none">
+                      Сообщение успешно отправлено, мы свяжемся с вами в ближайшее
+                      время.
                     </div>
                     <div class="dd-button-wrap">
                       <button class="dd-button w-100" type="submit">

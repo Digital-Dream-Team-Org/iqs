@@ -177,16 +177,26 @@
 
     $(".ajax-file-form").on("submit", function (e) {
       e.preventDefault();
+
       const url = $(this).attr("action");
       const method = $(this).attr("method");
       const dataType = $(this).data("type") || null;
       const serializedArray = $(this).serializeArray();
       const self = $(this);
+      const isFileRequired = $(this).data("fileRequired") || false;
 
       const $fileInput = $(this).find('input[type="file"]');
       let file = null;
       if ($fileInput) {
         file = $fileInput[0].files[0];
+      }
+
+      self.find(".form-success-message").addClass("d-none");
+      self.find(".form-error-message__file").addClass("d-none");
+
+      if (!file && isFileRequired) {
+        self.find(".form-error-message__file").removeClass("d-none");
+        return;
       }
 
       const formData = new FormData();
@@ -197,8 +207,6 @@
         formData.append("attachment", file);
       }
 
-      $(".form-success-message").addClass("d-none");
-
       $.ajax({
         url,
         type: method,
@@ -207,16 +215,6 @@
         processData: false,
         contentType: false,
         success: function (data) {
-          // Clear inputs
-          self
-            .find(
-              "input[type='text'], input[type='number'], input[type='tel'], input[type='email'], input[type='file'], input[type='password'], textarea",
-            )
-            .val("");
-
-          // Clear file input name
-          $(".contact-form__file-name").html("").addClass("d-none");
-
           // Error handler
           if (data === "Wrong format") {
             alert("Неверный формат файла, разрешенный формат: PDF, DOCX, XLSX");
@@ -231,6 +229,16 @@
             console.error(data);
             return;
           }
+
+          // Clear file input name
+          self.find(".contact-form__file-name").html("").addClass("d-none");
+
+          // Clear inputs
+          self
+            .find(
+              "input[type='text'], input[type='number'], input[type='tel'], input[type='email'], input[type='file'], input[type='password'], textarea",
+            )
+            .val("");
 
           // Success message
           if (self.hasClass("ajax-contact-form--modal")) {
@@ -556,11 +564,25 @@
     $(
       "#presentationSectionFormFileInput, #vacancySectionFormFileInput, #vacancyPopupFormFileInput",
     ).on("change", function (e) {
-      $(".contact-form__file-name").html("").addClass("d-none");
+      // Clear error
+      $(this)
+        .closest(".ajax-file-form")
+        .find(".form-error-message__file")
+        .addClass("d-none");
 
+      // Clear name
+      $(this)
+        .closest(".ajax-file-form")
+        .find(".contact-form__file-name")
+        .html("")
+        .addClass("d-none");
+
+      // Show name if exist
       let name = $(this)[0].files[0].name;
       if (name) {
-        $(".contact-form__file-name")
+        $(this)
+          .closest(".ajax-file-form")
+          .find(".contact-form__file-name")
           .html(`<small>${name}</small>`)
           .removeClass("d-none");
       }

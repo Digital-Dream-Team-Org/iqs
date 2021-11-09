@@ -208,7 +208,7 @@ Kcell и другими!
               <a href="mailto:hr_iqs@iqs.kz">hr_iqs@iqs.kz</a>, мы с рассмотрим
               вашу кандидатуру
             </div>
-            <form class="contact-form ajax-file-form" action="http://iq.local/wp-admin/admin-ajax.php" method="POST">
+            <form class="contact-form ajax-file-form" data-file-required="true" action="http://iq.local/wp-admin/admin-ajax.php" method="POST">
               <div class="contact-form__row">
                 <div class="dd-input-wrap">
                   <input
@@ -235,14 +235,14 @@ Kcell и другими!
                     <a class="contact-form__file-btn open-vacancy-section-form-file-input" href="#"></i> Прикрепить резюме <i class="icon-clip"></i></a>
                   </div>
                 </div>
-                <div class="contact-form__file-name text-muted mb-4 d-none">
-                  N/A
-                </div>
                 <div class="dd-button-wrap">
                   <button class="dd-button" type="submit">
                     Отправить свое резюме
                   </button>
                 </div>
+              </div>
+              <div class="contact-form__file-name text-muted mb-4 d-none">
+                N/A
               </div>
               <div class="form-checkbox-wrap">
                 <input
@@ -259,6 +259,13 @@ Kcell и другими!
                     Я согласен на сбор и обработку моих персональных данных
                   </span>
                 </label>
+              </div>
+              <div class="form-error-message__file text-danger mt-3 mb-3 d-none">
+                Пожалуйста, прикрепите свое резюме
+              </div>
+              <div class="form-success-message text-success mt-3 mb-3 d-none">
+                Сообщение успешно отправлено, мы свяжемся с вами в ближайшее
+                время.
               </div>
               <div>
                 <input
