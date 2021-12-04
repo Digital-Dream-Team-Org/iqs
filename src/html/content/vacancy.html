@@ -106,10 +106,17 @@ Kcell и другими!
                     <div class="vacancy-card__info-city">г. Нур-Султан</div>
                     <div class="vacancy-card__info-schedule">Полный рабочий день</div>
                   </div>
-                  <div class="vacancy-card__cv-btn-wrap">
-                    <a href="#" class="vacancy-card__cv-btn dd-button dd-button--unfilled-primary">
-                      Отправить резюме
-                    </a>
+                  <div class="vacancy-card__footer">
+                    <div class="vacancy-card__cv-btn-wrap">
+                      <a href="#" class="vacancy-card__cv-btn dd-button dd-button--unfilled-primary">
+                        Отправить резюме
+                      </a>
+                    </div>
+                    <div class="vacancy-card__details-btn-wrap">
+                      <a href="#" class="vacancy-card__details-btn  dd-button dd-button--unfilled-primary" target="_blank" download>
+                        Описание вакансии
+                      </a>
+                    </div>
                   </div>
                 </div>
                 <div class="vacancy-card__desc">
@@ -230,15 +237,22 @@ Kcell и другими!
                     required
                   />
                 </div>
-                <div class="dd-input-wrap">
-                  <div class="contact-form__file-btn-wrap">
-                    <a class="contact-form__file-btn open-vacancy-section-form-file-input" href="#"></i> Прикрепить резюме <i class="icon-clip"></i></a>
-                  </div>
+                <div class="dd-select-wrap">
+                  <select class="dd-select w-100" name="desired_vacancy" required>
+                    <option disabled selected value>- Интересующая вакансию -</option>
+                    <option value="IQS">Сисадмин</option>
+                    <option value="IQS">Менеджер</option>
+                  </select>
                 </div>
                 <div class="dd-button-wrap">
                   <button class="dd-button" type="submit">
                     Отправить свое резюме
                   </button>
+                </div>
+              </div>
+              <div class="dd-input-wrap mb-3">
+                <div class="contact-form__file-btn-wrap">
+                  <a class="contact-form__file-btn open-vacancy-section-form-file-input" href="#"></i> Прикрепить резюме <i class="icon-clip"></i></a>
                 </div>
               </div>
               <div class="contact-form__file-name text-muted mb-4 d-none">

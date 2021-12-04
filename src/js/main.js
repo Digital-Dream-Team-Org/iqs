@@ -705,11 +705,15 @@
           .closest(".service-swiper-wrap")
           .find(".swiper-button-next")[0];
 
+        let navigation = {};
+        if (arrowPrev && arrowNext) {
+          navigation = {
+            nextEl: arrowNext,
+            prevEl: arrowPrev,
+          };
+        }
         new Swiper($(this)[0], {
-          // navigation: {
-          //   nextEl: arrowNext,
-          //   prevEl: arrowPrev,
-          // },
+          navigation,
           slidesPerView: "auto",
           spaceBetween: 20,
           freeMode: true,
@@ -736,11 +740,16 @@
           .closest(".partner-swiper-wrap")
           .find(".swiper-button-next")[0];
 
+        let navigation = {};
+        if (arrowPrev && arrowNext) {
+          navigation = {
+            nextEl: arrowNext,
+            prevEl: arrowPrev,
+          };
+        }
+
         new Swiper($(this)[0], {
-          // navigation: {
-          //   nextEl: arrowNext,
-          //   prevEl: arrowPrev,
-          // },
+          navigation,
           slidesPerView: "auto",
           spaceBetween: 20,
           freeMode: true,
@@ -767,11 +776,16 @@
           .closest(".contact-swiper-wrap")
           .find(".swiper-button-next")[0];
 
+        let navigation = {};
+        if (arrowPrev && arrowNext) {
+          navigation = {
+            nextEl: arrowNext,
+            prevEl: arrowPrev,
+          };
+        }
+
         new Swiper($(this)[0], {
-          // navigation: {
-          //   nextEl: arrowNext,
-          //   prevEl: arrowPrev,
-          // },
+          navigation,
           slidesPerView: "auto",
           spaceBetween: 20,
           freeMode: true,
@@ -798,11 +812,16 @@
           .closest(".news-swiper-wrap")
           .find(".swiper-button-next")[0];
 
+        let navigation = {};
+        if (arrowPrev && arrowNext) {
+          navigation = {
+            nextEl: arrowNext,
+            prevEl: arrowPrev,
+          };
+        }
+
         new Swiper($(this)[0], {
-          // navigation: {
-          //   nextEl: arrowNext,
-          //   prevEl: arrowPrev,
-          // },
+          navigation,
           slidesPerView: "auto",
           spaceBetween: 20,
           freeMode: true,

@@ -220,6 +220,37 @@ h4 {
     color: rgba(0, 0, 0, 0.5);
   }
 }
+.dd-select-wrap {
+  position: relative;
+
+  &::after {
+    content: "▼";
+    position: absolute;
+    font-size: 1rem;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+
+    pointer-events: none;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+.dd-select {
+  appearance: none;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 15px 20px;
+  font-size: 1rem;
+  line-height: 140%;
+  outline: none !important;
+
+  padding-right: 36px;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
 
 // Button
 .dd-button {
@@ -1134,6 +1165,33 @@ h4 {
 
     color: $accentColor;
   }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+  }
+  &__swiper-btns-container {
+    display: flex;
+    margin-left: 12px;
+  }
+  &__swiper-btn {
+    position: static !important;
+    left: unset !important;
+    right: unset !important;
+    top: unset !important;
+    bottom: unset !important;
+    margin: unset !important;
+    &::after {
+      font-size: 10px !important;
+    }
+
+    background: #f8f7f7 !important;
+    width: 42px !important;
+    height: 42px !important;
+    &:not(:last-child) {
+      margin-right: 10px !important;
+    }
+  }
 }
 
 .sticky-heading {
@@ -1257,7 +1315,8 @@ h4 {
   &__row {
     display: flex;
 
-    .dd-input-wrap {
+    .dd-input-wrap,
+    .dd-select-wrap {
       margin-right: 20px;
       margin-bottom: 20px;
     }
@@ -1524,7 +1583,8 @@ h4 {
 
     margin-bottom: 30px;
   }
-  .dd-input-wrap {
+  .dd-input-wrap,
+  .dd-select-wrap {
     margin-bottom: 20px;
   }
   .dd-button-wrap {
@@ -1795,9 +1855,24 @@ h4 {
     }
   }
 
+  &__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    // justify-content: space-between;
+  }
+
   &__cv-btn-wrap {
   }
   &__cv-btn {
+    padding: 10px 16px;
+    font-size: 11px;
+    line-height: 150%;
+  }
+  &__details-btn-wrap {
+    margin-left: 12px;
+  }
+  &__details-btn {
     padding: 10px 16px;
     font-size: 11px;
     line-height: 150%;
